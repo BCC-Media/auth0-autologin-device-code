@@ -28,7 +28,7 @@ app.post('/confirm', async (req, res) => {
     try {
         const browser = await getBrowser();
         const page = await browser.newPage();
-        await page.goto(`https://login.bcc.no/activate?user_code=${user_code}`);
+        await page.goto(`https://${AUTH0_DOMAIN}/activate?user_code=${user_code}`);
 
         const button = await page.$('button[value="confirm"]');
         try {
