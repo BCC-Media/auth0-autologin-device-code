@@ -49,11 +49,9 @@ app.post('/confirm', async (req, res) => {
         const accept = await page.$('button[value="accept"]');
         try { await accept.click(); } catch { }
         await new Promise(resolve => setTimeout(resolve, 8000));
-        // log content of the page
-        const content = await page.content();
 
         await browser.close();
-        res.status(200).send(content);
+        res.status(200).send();
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
