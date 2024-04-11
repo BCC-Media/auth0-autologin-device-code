@@ -12,6 +12,11 @@ if (!apiKey || apiKey.length < 6) {
     console.error('A safe API key is required (minimum 6 characters)');
     process.exit(1);
 }
+const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
+if (!AUTH0_DOMAIN) {
+    console.error('AUTH0_DOMAIN is required');
+    process.exit(1);
+}
 
 app.post('/confirm', async (req, res) => {
     const { user_code, api_key } = req.query;
