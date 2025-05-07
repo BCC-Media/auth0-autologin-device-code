@@ -45,8 +45,13 @@ app.post('/confirm', async (req, res) => {
         // Fill the login form and submit
         await new Promise(resolve => setTimeout(resolve, 10000));
         console.log('Filling login form...');
+        console.log('- Filling email...');
         await page.type('input[name="username"]', process.env.LOGIN_EMAIL);
-        await page.click('button[type="submit"]');
+        await Promise.all([
+            page.waitForNavigation(),
+            page.click('button[type="submit"]'),
+        ]);
+        console.log('- Filling password...');
         await page.type('input[name="password"]', process.env.LOGIN_PASSWORD);
         await page.click('button[type="submit"]');
 
